@@ -25,6 +25,47 @@
     },
     {
       "key": {
+        "uuid": "9abe1de1_0352d113",
+        "filename": "python-osc-placement.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 393
+      },
+      "writtenOn": "2018-07-31T11:07:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9abe1de1_a33a05cc",
+      "range": {
+        "startLine": 20,
+        "startChar": 66,
+        "endLine": 20,
+        "endChar": 73
+      },
+      "revId": "ec2fbee44ffab449e533df0d721049e986c4014d",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9abe1de1_833ee1b6",
+        "filename": "python-osc-placement.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 393
+      },
+      "writtenOn": "2018-07-31T11:07:08Z",
+      "side": 1,
+      "message": "I made this python2-pbr",
+      "revId": "ec2fbee44ffab449e533df0d721049e986c4014d",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9abe1de1_833701e3",
         "filename": "python-osc-placement.spec",
         "patchSetId": 1
@@ -36,6 +77,24 @@
       "writtenOn": "2018-07-31T10:53:00Z",
       "side": 1,
       "message": "Missing Requires: python-pbr, it\u0027s used in https://github.com/openstack/osc-placement/blob/master/osc_placement/__init__.py",
+      "revId": "ec2fbee44ffab449e533df0d721049e986c4014d",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9abe1de1_a341e53b",
+        "filename": "python-osc-placement.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 393
+      },
+      "writtenOn": "2018-07-31T11:07:08Z",
+      "side": 1,
+      "message": "Done.\n\nI\u0027m convinced there used to be something in the Fedora rpm build macros which added these automatically. I\u0027m sure I recall fighting to *remove* bogus deps which were added automatically.",
+      "parentUuid": "9abe1de1_833701e3",
       "revId": "ec2fbee44ffab449e533df0d721049e986c4014d",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
       "unresolved": false
@@ -65,6 +124,30 @@
     },
     {
       "key": {
+        "uuid": "9abe1de1_4348c95b",
+        "filename": "python-osc-placement.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 393
+      },
+      "writtenOn": "2018-07-31T11:07:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9abe1de1_6334eddd",
+      "range": {
+        "startLine": 65,
+        "startChar": 14,
+        "endLine": 65,
+        "endChar": 28
+      },
+      "revId": "ec2fbee44ffab449e533df0d721049e986c4014d",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9abe1de1_4331e9eb",
         "filename": "python-osc-placement.spec",
         "patchSetId": 1
@@ -76,6 +159,24 @@
       "writtenOn": "2018-07-31T10:53:00Z",
       "side": 1,
       "message": "add pbr here too.",
+      "revId": "ec2fbee44ffab449e533df0d721049e986c4014d",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9abe1de1_e36d9dcd",
+        "filename": "python-osc-placement.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 393
+      },
+      "writtenOn": "2018-07-31T11:07:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9abe1de1_4331e9eb",
       "revId": "ec2fbee44ffab449e533df0d721049e986c4014d",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
       "unresolved": false
