@@ -33,6 +33,7 @@ BuildRequires:  git
 BuildRequires:  python2-mock
 BuildRequires:  python2-oslotest
 BuildRequires:  python2-subunit
+BuildRequires:  python2-testrepository
 BuildRequires:  python2-six >= 1.10.0
 BuildRequires:  python2-keystoneauth1 >= 3.3.0
 BuildRequires:  python2-osc-lib >= 1.2.0
@@ -57,6 +58,7 @@ Requires:   python2-%{library} = %{version}-%{release}
 Requires:   python2-mock
 Requires:   python2-oslotest
 Requires:   python2-subunit
+Requires:   python2-testrepository
 
 %description -n python2-%{library}-tests
 OpenStackClient plugin for the Placement service tests
@@ -88,6 +90,7 @@ BuildRequires:  git
 BuildRequires:  python3-mock
 BuildRequires:  python3-oslotest
 BuildRequires:  python3-subunit
+BuildRequires:  python3-testrepository
 BuildRequires:  python3-six >= 1.10.0
 BuildRequires:  python3-keystoneauth1 >= 3.3.0
 BuildRequires:  python3-osc-lib >= 1.2.0
@@ -112,6 +115,7 @@ Requires:   python3-%{library} = %{version}-%{release}
 Requires:   python3-mock
 Requires:   python3-oslotest
 Requires:   python3-subunit
+Requires:   python3-testrepository
 
 %description -n python3-%{library}-tests
 OpenStackClient plugin for the Placement service tests
