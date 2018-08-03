@@ -154,11 +154,12 @@ rm -rf doc/build/html/.{doctrees,buildinfo}
 
 
 %check
+# Restrict to unit tests: we deliberately don't run functional here
 %if 0%{?with_python3}
-%{__python3} setup.py test
+OS_TEST_PATH=./osc_placement/tests/unit/ %{__python3} setup.py test
 rm -rf .testrepository
 %endif
-%{__python2} setup.py test
+OS_TEST_PATH=./osc_placement/tests/unit/ %{__python2} setup.py test
 
 %files -n python2-%{library}
 %license LICENSE
