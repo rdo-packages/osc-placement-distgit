@@ -1,11 +1,15 @@
-%{!?upstream_version: %global upstream_version %{version}%{?milestone}}
-
-# Python3 support in OpenStack starts with version 3.5,
-# which is only in Fedora 24+
-%if 0%{?fedora} >= 24
-%global with_python3 1
+# Macros for py2/py3 compatibility
+%if 0%{?fedora} || 0%{?rhel} > 7
+%global pyver %{python3_pkgversion}
+%else
+%global pyver 2
 %endif
-
+%global pyver_bin python%{pyver}
+%global pyver_sitelib %python%{pyver}_sitelib
+%global pyver_install %py%{pyver}_install
+%global pyver_build %py%{pyver}_build
+# End of macros for py2/py3 compatibility
+%{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 
 %global library osc-placement
 %global module osc_placement
@@ -21,29 +25,36 @@ Source0:    http://tarballs.openstack.org/%{library}/%{library}-%{upstream_versi
 
 BuildArch:  noarch
 
-%package -n python2-%{library}
+%description
+OpenStackClient plugin for the Placement service
+
+This is an OpenStackClient plugin, that provides CLI for the Placement service.
+Python API binding is not implemented - Placement API consumers are encouraged
+to use the REST API directly, CLI is provided only for convenience of users.
+
+%package -n python%{pyver}-%{library}
 Summary:    OpenStackClient plugin for the Placement service
 %{?python_provide:%python_provide python2-%{library}}
 
-BuildRequires:  python2-devel
-BuildRequires:  python2-pbr >= 2.0.0
-BuildRequires:  python-setuptools
+BuildRequires:  python%{pyver}-devel
+BuildRequires:  python%{pyver}-pbr >= 2.0.0
+BuildRequires:  python%{pyver}-setuptools
 BuildRequires:  git
 
-BuildRequires:  python2-mock
-BuildRequires:  python2-oslotest
-BuildRequires:  python2-subunit
-BuildRequires:  python2-testrepository
-BuildRequires:  python2-six >= 1.10.0
-BuildRequires:  python2-keystoneauth1 >= 3.3.0
-BuildRequires:  python2-osc-lib >= 1.2.0
+BuildRequires:  python%{pyver}-mock
+BuildRequires:  python%{pyver}-oslotest
+BuildRequires:  python%{pyver}-subunit
+BuildRequires:  python%{pyver}-testrepository
+BuildRequires:  python%{pyver}-six >= 1.10.0
+BuildRequires:  python%{pyver}-keystoneauth1 >= 3.3.0
+BuildRequires:  python%{pyver}-osc-lib >= 1.2.0
 
-Requires:   python2-pbr >= 2.0.0
-Requires:   python2-six >= 1.10.0
-Requires:   python2-keystoneauth1 >= 3.3.0
-Requires:   python2-osc-lib >= 1.2.0
+Requires:   python%{pyver}-pbr >= 2.0.0
+Requires:   python%{pyver}-six >= 1.10.0
+Requires:   python%{pyver}-keystoneauth1 >= 3.3.0
+Requires:   python%{pyver}-osc-lib >= 1.2.0
 
-%description -n python2-%{library}
+%description -n python%{pyver}-%{library}
 OpenStackClient plugin for the Placement service.
 
 This is an OpenStackClient plugin, that provides CLI for the Placement service.
@@ -51,16 +62,16 @@ Python API binding is not implemented - Placement API consumers are encouraged
 to use the REST API directly, CLI is provided only for convenience of users.
 
 
-%package -n python2-%{library}-tests
+%package -n python%{pyver}-%{library}-tests
 Summary:    OpenStackClient plugin for the Placement service tests
-Requires:   python2-%{library} = %{version}-%{release}
+Requires:   python%{pyver}-%{library} = %{version}-%{release}
 
-Requires:   python2-mock
-Requires:   python2-oslotest
-Requires:   python2-subunit
-Requires:   python2-testrepository
+Requires:   python%{pyver}-mock
+Requires:   python%{pyver}-oslotest
+Requires:   python%{pyver}-subunit
+Requires:   python%{pyver}-testrepository
 
-%description -n python2-%{library}-tests
+%description -n python%{pyver}-%{library}-tests
 OpenStackClient plugin for the Placement service tests
 
 This package contains the test files.
@@ -69,69 +80,13 @@ This package contains the test files.
 %package -n python-%{library}-doc
 Summary:    OpenStackClient plugin for the Placement service documentation
 
-BuildRequires: python2-sphinx
-BuildRequires: python2-oslo-sphinx
+BuildRequires: python%{pyver}-sphinx
+BuildRequires: python%{pyver}-oslo-sphinx
 
 %description -n python-%{library}-doc
 OpenStackClient plugin for the Placement service.
 
 This package contains the documentation.
-
-%if 0%{?with_python3}
-%package -n python3-%{library}
-Summary:    OpenStackClient plugin for the Placement service
-%{?python_provide:%python_provide python3-%{library}}
-
-BuildRequires:  python3-devel
-BuildRequires:  python3-pbr >= 2.0.0
-BuildRequires:  python3-setuptools
-BuildRequires:  git
-
-BuildRequires:  python3-mock
-BuildRequires:  python3-oslotest
-BuildRequires:  python3-subunit
-BuildRequires:  python3-testrepository
-BuildRequires:  python3-six >= 1.10.0
-BuildRequires:  python3-keystoneauth1 >= 3.3.0
-BuildRequires:  python3-osc-lib >= 1.2.0
-
-Requires:   python3-pbr >= 2.0.0
-Requires:   python3-six >= 1.10.0
-Requires:   python3-keystoneauth1 >= 3.3.0
-Requires:   python3-osc-lib >= 1.2.0
-
-%description -n python3-%{library}
-OpenStackClient plugin for the Placement service
-
-This is an OpenStackClient plugin, that provides CLI for the Placement service.
-Python API binding is not implemented - Placement API consumers are encouraged
-to use the REST API directly, CLI is provided only for convenience of users.
-
-
-%package -n python3-%{library}-tests
-Summary:    OpenStackClient plugin for the Placement service tests
-Requires:   python3-%{library} = %{version}-%{release}
-
-Requires:   python3-mock
-Requires:   python3-oslotest
-Requires:   python3-subunit
-Requires:   python3-testrepository
-
-%description -n python3-%{library}-tests
-OpenStackClient plugin for the Placement service tests
-
-This package contains the test files.
-
-%endif # with_python3
-
-
-%description
-OpenStackClient plugin for the Placement service
-
-This is an OpenStackClient plugin, that provides CLI for the Placement service.
-Python API binding is not implemented - Placement API consumers are encouraged
-to use the REST API directly, CLI is provided only for convenience of users.
-
 
 %prep
 %autosetup -n %{library}-%{upstream_version} -S git
@@ -140,54 +95,31 @@ to use the REST API directly, CLI is provided only for convenience of users.
 rm -f *requirements.txt
 
 %build
-%py2_build
-%if 0%{?with_python3}
-%py3_build
-%endif
+%{pyver_build}
 
 # generate html docs
-%{__python2} setup.py build_sphinx
-# remove the sphinx-build leftovers
+%{pyver_bin} setup.py build_sphinx
+# remove the sphinx-build-%{pyver} leftovers
 rm -rf doc/build/html/.{doctrees,buildinfo}
 
 %install
-%py2_install
-%if 0%{?with_python3}
-%py3_install
-%endif
-
+%{pyver_install}
 
 %check
-%if 0%{?with_python3}
-%{__python3} setup.py test
-rm -rf .testrepository
-%endif
-%{__python2} setup.py test
+%{pyver_bin} setup.py test
 
-%files -n python2-%{library}
+%files -n python%{pyver}-%{library}
 %license LICENSE
-%{python2_sitelib}/%{module}
-%{python2_sitelib}/%{module}-*.egg-info
-%exclude %{python2_sitelib}/%{module}/tests
+%{pyver_sitelib}/%{module}
+%{pyver_sitelib}/%{module}-*.egg-info
+%exclude %{pyver_sitelib}/%{module}/tests
 
-%files -n python2-%{library}-tests
+%files -n python%{pyver}-%{library}-tests
 %license LICENSE
-%{python2_sitelib}/%{module}/tests
+%{pyver_sitelib}/%{module}/tests
 
 %files -n python-%{library}-doc
 %license LICENSE
 %doc doc/build/html README.rst
-
-%if 0%{?with_python3}
-%files -n python3-%{library}
-%license LICENSE
-%{python3_sitelib}/%{module}
-%{python3_sitelib}/%{module}-*.egg-info
-%exclude %{python3_sitelib}/%{module}/tests
-
-%files -n python3-%{library}-tests
-%license LICENSE
-%{python3_sitelib}/%{module}/tests
-%endif # with_python3
 
 %changelog
