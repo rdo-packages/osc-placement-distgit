@@ -124,3 +124,4 @@ export PYTHON=%{pyver_bin}
 %doc doc/build/html README.rst
 
 %changelog
+# REMOVEME: error caused by commit http://git.openstack.org/cgit/openstack/osc-placement/commit/?id=fc563d37bceac78f053772e8822717bc7006a92f
