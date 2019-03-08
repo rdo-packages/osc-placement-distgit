@@ -47,7 +47,9 @@ BuildRequires:  python%{pyver}-subunit
 BuildRequires:  python%{pyver}-testrepository
 BuildRequires:  python%{pyver}-six >= 1.10.0
 BuildRequires:  python%{pyver}-keystoneauth1 >= 3.3.0
+BuildRequires:  python%{pyver}-openstackclient
 BuildRequires:  python%{pyver}-osc-lib >= 1.2.0
+BuildRequires:  python%{pyver}-stestr
 
 Requires:   python%{pyver}-pbr >= 2.0.0
 Requires:   python%{pyver}-six >= 1.10.0
@@ -70,6 +72,8 @@ Requires:   python%{pyver}-mock
 Requires:   python%{pyver}-oslotest
 Requires:   python%{pyver}-subunit
 Requires:   python%{pyver}-testrepository
+Requires:   python%{pyver}-stestr
+Requires:   python%{pyver}-openstackclient
 
 %description -n python%{pyver}-%{library}-tests
 OpenStackClient plugin for the Placement service tests
@@ -107,7 +111,7 @@ rm -rf doc/build/html/.{doctrees,buildinfo}
 
 %check
 export PYTHON=%{pyver_bin}
-%{pyver_bin} setup.py test
+stestr-%{pyver} run
 
 %files -n python%{pyver}-%{library}
 %license LICENSE
