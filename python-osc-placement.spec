@@ -128,3 +128,4 @@ stestr-%{pyver} run
 %doc doc/build/html README.rst
 
 %changelog
+# REMOVEME: error caused by commit http://git.openstack.org/cgit/openstack/osc-placement/commit/?id=bffd59ea53bad60dd2b1f4c37ff0c40d11c30f99
