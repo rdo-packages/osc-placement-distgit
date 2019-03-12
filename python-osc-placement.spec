@@ -53,6 +53,7 @@ Requires:   python%{pyver}-pbr >= 2.0.0
 Requires:   python%{pyver}-six >= 1.10.0
 Requires:   python%{pyver}-keystoneauth1 >= 3.3.0
 Requires:   python%{pyver}-osc-lib >= 1.2.0
+Requires:   python%{pyver}-simplejson >= 3.16.0
 
 %description -n python%{pyver}-%{library}
 OpenStackClient plugin for the Placement service.
