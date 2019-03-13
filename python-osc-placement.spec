@@ -15,8 +15,8 @@
 %global module osc_placement
 
 Name:       python-%{library}
-Version:    XXX
-Release:    XXX
+Version:    1.5.0
+Release:    1%{?dist}
 Summary:    OpenStackClient plugin for the Placement service
 License:    ASL 2.0
 URL:        https://github.com/openstack/osc-placement
@@ -130,3 +130,6 @@ stestr-%{pyver} run
 %doc doc/build/html README.rst
 
 %changelog
+* Wed Mar 13 2019 RDO <dev@lists.rdoproject.org> 1.5.0-1
+- Update to 1.5.0
+
