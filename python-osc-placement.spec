@@ -13,6 +13,7 @@
 
 %global library osc-placement
 %global module osc_placement
+%global with_doc 1
 
 Name:       python-%{library}
 Version:    XXX
@@ -83,16 +84,18 @@ OpenStackClient plugin for the Placement service tests
 This package contains the test files.
 
 
+%if 0%{?with_doc}
 %package -n python-%{library}-doc
 Summary:    OpenStackClient plugin for the Placement service documentation
 
 BuildRequires: python%{pyver}-sphinx
-BuildRequires: python%{pyver}-oslo-sphinx
+BuildRequires: python%{pyver}-openstackdocstheme
 
 %description -n python-%{library}-doc
 OpenStackClient plugin for the Placement service.
 
 This package contains the documentation.
+%endif
 
 %prep
 %autosetup -n %{library}-%{upstream_version} -S git
@@ -103,10 +106,12 @@ rm -f *requirements.txt
 %build
 %{pyver_build}
 
+%if 0%{?with_doc}
 # generate html docs
 %{pyver_bin} setup.py build_sphinx
 # remove the sphinx-build-%{pyver} leftovers
 rm -rf doc/build/html/.{doctrees,buildinfo}
+%endif
 
 %install
 %{pyver_install}
@@ -125,8 +130,10 @@ stestr-%{pyver} run
 %license LICENSE
 %{pyver_sitelib}/%{module}/tests
 
+%if 0%{?with_doc}
 %files -n python-%{library}-doc
 %license LICENSE
 %doc doc/build/html README.rst
+%endif
 
 %changelog
