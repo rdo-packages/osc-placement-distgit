@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0774373a_db668fff",
+        "filename": "python-osc-placement.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2019-08-06T17:16:25Z",
+      "side": 1,
+      "message": "I think osc-placement does not need oslo-sphinx anymore, it has been replaced and can be removed:\n\nhttps://github.com/openstack/osc-placement/commit/dbd50cbf974adfd89008433407b3f15a78643c30",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 41
+      },
+      "revId": "8010ce5acd0833c0a5a0948a296f1f0c98d0f58e",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
