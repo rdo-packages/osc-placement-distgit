@@ -89,6 +89,7 @@ This package contains the test files.
 Summary:    OpenStackClient plugin for the Placement service documentation
 
 BuildRequires: python%{pyver}-sphinx
+BuildRequires: python%{pyver}-oslo-sphinx
 BuildRequires: python%{pyver}-openstackdocstheme
 
 %description -n python-%{library}-doc
