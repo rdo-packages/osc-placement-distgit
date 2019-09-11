@@ -51,6 +51,7 @@ BuildRequires:  python%{pyver}-keystoneauth1 >= 3.3.0
 BuildRequires:  python%{pyver}-openstackclient
 BuildRequires:  python%{pyver}-osc-lib >= 1.2.0
 BuildRequires:  python%{pyver}-stestr
+BuildRequires:  python%{pyver}-oslo-utils >= 3.37.0
 
 Requires:   python%{pyver}-pbr >= 2.0.0
 Requires:   python%{pyver}-six >= 1.10.0
@@ -58,6 +59,7 @@ Requires:   python%{pyver}-keystoneauth1 >= 3.3.0
 Requires:   python%{pyver}-osc-lib >= 1.2.0
 # We currently don't have 3.16.0, so setting >= 3.10.0
 Requires:   python%{pyver}-simplejson >= 3.10.0
+Requires:   python%{pyver}-oslo-utils >= 3.37.0
 
 %description -n python%{pyver}-%{library}
 OpenStackClient plugin for the Placement service.
@@ -89,8 +91,8 @@ This package contains the test files.
 Summary:    OpenStackClient plugin for the Placement service documentation
 
 BuildRequires: python%{pyver}-sphinx
-BuildRequires: python%{pyver}-oslo-sphinx
 BuildRequires: python%{pyver}-openstackdocstheme
+BuildRequires: python%{pyver}-cliff
 
 %description -n python-%{library}-doc
 OpenStackClient plugin for the Placement service.
