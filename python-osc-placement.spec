@@ -58,7 +58,7 @@ Requires:   python%{pyver}-six >= 1.10.0
 Requires:   python%{pyver}-keystoneauth1 >= 3.3.0
 Requires:   python%{pyver}-osc-lib >= 1.2.0
 # We currently don't have 3.16.0, so setting >= 3.10.0
-Requires:   python%{pyver}-simplejson >= 3.10.0
+Requires:   python%{pyver}-simplejson >= 3.16.0
 Requires:   python%{pyver}-oslo-utils >= 3.37.0
 
 %description -n python%{pyver}-%{library}
