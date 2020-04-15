@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "afcb2a4b_eeed38b1",
+        "filename": "python-osc-placement.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 403
+      },
+      "writtenOn": "2020-04-15T07:31:44Z",
+      "side": 1,
+      "message": "can cleanup this, ok to cleanup with pyver macro cleanup though.",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 54
+      },
+      "revId": "4bb372b9c1d0d4d81fc1f39ad29a12465da6d811",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
