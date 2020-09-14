@@ -100,7 +100,8 @@ rm -f *requirements.txt
 
 %if 0%{?with_doc}
 # generate html docs
-%{__python3} setup.py build_sphinx
+export PYTHONPATH=.
+sphinx-build -W -b html doc/source doc/build/html
 # remove the sphinx-build-3 leftovers
 rm -rf doc/build/html/.{doctrees,buildinfo}
 %endif
