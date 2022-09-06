@@ -48,7 +48,6 @@ BuildRequires:  python3-mock
 BuildRequires:  python3-oslotest
 BuildRequires:  python3-subunit
 BuildRequires:  python3-testrepository
-BuildRequires:  python3-six >= 1.10.0
 BuildRequires:  python3-keystoneauth1 >= 3.3.0
 BuildRequires:  python3-openstackclient
 BuildRequires:  python3-osc-lib >= 1.2.0
@@ -56,7 +55,6 @@ BuildRequires:  python3-stestr
 BuildRequires:  python3-oslo-utils >= 3.37.0
 
 Requires:   python3-pbr >= 2.0.0
-Requires:   python3-six >= 1.10.0
 Requires:   python3-keystoneauth1 >= 3.3.0
 Requires:   python3-osc-lib >= 1.2.0
 # We currently don't have 3.16.0, so setting >= 3.10.0
