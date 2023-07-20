@@ -1,6 +1,12 @@
 %{!?sources_gpg: %{!?dlrn:%global sources_gpg 1} }
 %global sources_gpg_sign 0x2426b928085a020d8a90d0d879ab7008d0896c8a
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
+# we are excluding some BRs from automatic generator
+%global excluded_brs doc8 bandit pre-commit hacking flake8-import-order
+# Exclude sphinx from BRs if docs are disabled
+%if ! 0%{?with_doc}
+%global excluded_brs %{excluded_brs} sphinx openstackdocstheme
+%endif
 
 %global library osc-placement
 %global module osc_placement
@@ -10,7 +16,7 @@ Name:       python-%{library}
 Version:    XXX
 Release:    XXX
 Summary:    OpenStackClient plugin for the Placement service
-License:    ASL 2.0
+License:    Apache-2.0
 URL:        https://github.com/openstack/osc-placement
 
 Source0:    http://tarballs.openstack.org/%{library}/%{library}-%{upstream_version}.tar.gz
@@ -37,29 +43,10 @@ to use the REST API directly, CLI is provided only for convenience of users.
 
 %package -n python3-%{library}
 Summary:    OpenStackClient plugin for the Placement service
-%{?python_provide:%python_provide python2-%{library}}
 
 BuildRequires:  python3-devel
-BuildRequires:  python3-pbr >= 2.0.0
-BuildRequires:  python3-setuptools
+BuildRequires:  pyproject-rpm-macros
 BuildRequires:  git-core
-
-BuildRequires:  python3-mock
-BuildRequires:  python3-oslotest
-BuildRequires:  python3-subunit
-BuildRequires:  python3-testrepository
-BuildRequires:  python3-keystoneauth1 >= 3.3.0
-BuildRequires:  python3-openstackclient
-BuildRequires:  python3-osc-lib >= 1.2.0
-BuildRequires:  python3-stestr
-BuildRequires:  python3-oslo-utils >= 3.37.0
-
-Requires:   python3-pbr >= 2.0.0
-Requires:   python3-keystoneauth1 >= 3.3.0
-Requires:   python3-osc-lib >= 1.2.0
-# We currently don't have 3.16.0, so setting >= 3.10.0
-Requires:   python3-simplejson >= 3.16.0
-Requires:   python3-oslo-utils >= 3.37.0
 
 %description -n python3-%{library}
 OpenStackClient plugin for the Placement service.
@@ -90,10 +77,6 @@ This package contains the test files.
 %package -n python-%{library}-doc
 Summary:    OpenStackClient plugin for the Placement service documentation
 
-BuildRequires: python3-sphinx
-BuildRequires: python3-openstackdocstheme
-BuildRequires: python3-cliff
-
 %description -n python-%{library}-doc
 OpenStackClient plugin for the Placement service.
 
@@ -107,31 +90,50 @@ This package contains the documentation.
 %endif
 %autosetup -n %{library}-%{upstream_version} -S git
 
-# Let's handle dependencies ourseleves
-rm -f *requirements.txt
+
+sed -i /^[[:space:]]*-c{env:.*_CONSTRAINTS_FILE.*/d tox.ini
+sed -i "s/^deps = -c{env:.*_CONSTRAINTS_FILE.*/deps =/" tox.ini
+sed -i /^minversion.*/d tox.ini
+sed -i /^requires.*virtualenv.*/d tox.ini
+sed -i '/sphinx-build/ s/-W//' tox.ini
+
+# Exclude some bad-known BRs
+for pkg in %{excluded_brs}; do
+  for reqfile in doc/requirements.txt test-requirements.txt; do
+    if [ -f $reqfile ]; then
+      sed -i /^${pkg}.*/d $reqfile
+    fi
+  done
+done
+
+# Automatic BR generation
+%generate_buildrequires
+%if 0%{?with_doc}
+  %pyproject_buildrequires -t -e %{default_toxenv},docs
+%else
+  %pyproject_buildrequires -t -e %{default_toxenv}
+%endif
 
 %build
-%{py3_build}
+%pyproject_wheel
 
 %if 0%{?with_doc}
 # generate html docs
-export PYTHONPATH=.
-sphinx-build -W -b html doc/source doc/build/html
+%tox -e docs
 # remove the sphinx-build-3 leftovers
 rm -rf doc/build/html/.{doctrees,buildinfo}
 %endif
 
 %install
-%{py3_install}
+%pyproject_install
 
 %check
-export PYTHON=%{__python3}
-stestr-3 run
+%tox -e %{default_toxenv}
 
 %files -n python3-%{library}
 %license LICENSE
 %{python3_sitelib}/%{module}
-%{python3_sitelib}/%{module}-*.egg-info
+%{python3_sitelib}/%{module}-*.dist-info
 %exclude %{python3_sitelib}/%{module}/tests
 
 %files -n python3-%{library}-tests
