@@ -60,7 +60,6 @@ to use the REST API directly, CLI is provided only for convenience of users.
 Summary:    OpenStackClient plugin for the Placement service tests
 Requires:   python3-%{library} = %{version}-%{release}
 
-Requires:   python3-mock
 Requires:   python3-oslotest
 Requires:   python3-subunit
 Requires:   python3-testrepository
